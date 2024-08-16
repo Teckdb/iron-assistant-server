@@ -1,6 +1,6 @@
-#Endpoits List
+# Endpoits List
 
-##Device routes
+## Device routes
 | HTTP METHOD | PATH               | ACTION |
 | ----------- | ------------------ | ------ |
 |             |                    |        |
@@ -12,7 +12,7 @@
 |DELETE       | /devices           |        |
 
 
-##Areas routes
+## Areas routes
 | HTTP METHOD | PATH               | ACTION |
 | ----------- | ------------------ | ------ |
 |             |                    |        |
@@ -23,7 +23,10 @@
 |PUT          | /areas             |        |
 |DELETE       | /areas             |        |
 
-##Automation routes
+## Automation routes
+| HTTP METHOD | PATH               | ACTION |
+| ----------- | ------------------ | ------ |
+|             |                    |        |
 |GET          | /automation        |        |
 |GET          | /automation/:id    |        |
 |GET          | /automation/search |        |
@@ -31,7 +34,10 @@
 |PUT          | /automation        |        |
 |DELETE       | /automation        |        |
 
-##User routes
+## User routes
+| HTTP METHOD | PATH               | ACTION |
+| ----------- | ------------------ | ------ |
+|             |                    |        |
 |GET          | /user              |        |
 |GET          | /user/:id          |        |
 |GET          | /user/search       |        | 
@@ -39,7 +45,7 @@
 |PUT          | /user              |        |
 |DELETE       | /user              |        |
 
-##Auth routes
+## Auth routes
 | HTTP METHOD | PATH               | ACTION |
 | ----------- | ------------------ | ------ |
 |             |                    |        |
