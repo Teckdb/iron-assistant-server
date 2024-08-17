@@ -8,8 +8,8 @@
 |GET          | /devices/:id       |        |
 |GET          | /devices/search    |        |
 |POST         | /devices           |        |
-|PUT          | /devices           |        |
-|DELETE       | /devices           |        |
+|PUT          | /devices/:id       |        |
+|DELETE       | /devices/:id       |        |
 
 
 ## Areas routes
@@ -20,8 +20,8 @@
 |GET          | /areas/:id         |        |
 |GET          | /areas/search      |        |
 |POST         | /areas             |        |
-|PUT          | /areas             |        |
-|DELETE       | /areas             |        |
+|PUT          | /areas/:id         |        |
+|DELETE       | /areas/:id         |        |
 
 ## Automation routes
 | HTTP METHOD | PATH               | ACTION |
@@ -31,8 +31,8 @@
 |GET          | /automation/:id    |        |
 |GET          | /automation/search |        |
 |POST         | /automation        |        |
-|PUT          | /automation        |        |
-|DELETE       | /automation        |        |
+|PUT          | /automation/:id    |        |
+|DELETE       | /automation/:id    |        |
 
 ## User routes
 | HTTP METHOD | PATH               | ACTION |
@@ -42,8 +42,8 @@
 |GET          | /user/:id          |        |
 |GET          | /user/search       |        | 
 |POST         | /user              |        |
-|PUT          | /user              |        |
-|DELETE       | /user              |        |
+|PUT          | /user/:id          |        |
+|DELETE       | /user/:id          |        |
 
 ## Auth routes
 | HTTP METHOD | PATH               | ACTION |
