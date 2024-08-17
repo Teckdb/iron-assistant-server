@@ -49,6 +49,6 @@
 | HTTP METHOD | PATH               | ACTION |
 | ----------- | ------------------ | ------ |
 |             |                    |        |
-|GET          | /devices           |        |
-|GET          | /devices/:id       |        |
-|GET          | /devices/search    |        |
+|GET          | /signup            |        |
+|GET          | /login             |        |
+|GET          | /verify            |        |
