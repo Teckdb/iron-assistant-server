@@ -4,27 +4,61 @@ const { response } = require("express")
 const Area = require('./../models/Area.model')
 
 
-router.post('/areas', (req, res, next) => {
+router.post("/", (req, res) => {
 
-    res.send('lol')
+    const { name, icon, floor, picture } = req.body
 
-    // Area
-    // .create
+    Area
+        .create({ name, icon, floor, picture })
+        .then(newArea => res.json(newArea))
+        .catch((err) => res.status(500).json({ code: 500, message: "Error while creating the area", details: err }))
 
 })
 
-// router.get('/areas', (req, res, next) => {
+router.get('/', (req, res, next) => {
 
-//     res.send('hola')
 
-//     // Area
-//     //     .find()
-//     //     .select()
-//     //     .sort()
-//     //     .then(response => res.json(response))
-//     //     .catch(err => next(err))
+    Area
+        .find()
+        .then(areas => res.json(areas))
+        .catch((err) => res.status(500).json({ code: 500, message: "Error while fetching the areas", details: err }))
 
-// })
+})
+
+router.get('/:_id', (req, res, next) => {
+
+    const { _id: areaId } = req.params
+
+    Area
+        .findById(areaId)
+        .then(area => res.json(area))
+        .catch((err) => res.status(500).json({ code: 500, message: "Error while fetching the area", details: err }))
+
+})
+
+router.put("/:_id", (req, res) => {
+
+    const { _id: areaId } = req.params
+    const { name, icon, floor, picture } = req.body
+
+    Area
+        .findByIdAndUpdate(areaId, { name, icon, floor, picture }, { new: true })
+        .then(area => res.json(area))
+        .catch((err) => res.status(500).json({ code: 500, message: "Error while editing the area", details: err }))
+})
+
+router.delete("/:_id", (req, res) => {
+    const { _id: areaId } = req.params
+
+    Area
+        .findByIdAndDelete(areaId)
+        .then(area => res.json(area))
+        .catch((err) => res.status(500).json({ code: 500, message: "Error while deleting the area", details: err }))
+
+})
+
+
+module.exports = router
 
 
 

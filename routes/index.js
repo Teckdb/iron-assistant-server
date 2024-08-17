@@ -4,4 +4,6 @@ module.exports = app => {
     const usersRouter = require("./users.routes")
     app.use("/api/users", usersRouter)
     const areasRouter = require("./areas.routes")
+    app.use("/api/areas", areasRouter)
+
 }
