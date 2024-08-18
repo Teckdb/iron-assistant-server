@@ -55,6 +55,18 @@ router.delete("/:_id", (req, res) => {
 
 })
 
+router.get('/search', (req, res) => {
+    const { name, floor } = req.query
+
+    const filter = {}
+    if (name) filter.name = new RegExp(name, 'i')
+    if (floor) filter.floor = floor
+
+    Area.find(filter)
+        .then(areas => res.json(areas))
+        .catch((err) => res.status(500).json({ code: 500, message: "Error while searching the areas", details: err }))
+})
+
 
 module.exports = router
 
