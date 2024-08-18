@@ -3,7 +3,6 @@ const router = require("express").Router()
 const { response } = require("express")
 const Area = require('./../models/Area.model')
 
-
 router.post("/", (req, res) => {
 
     const { name, icon, floor, picture } = req.body
@@ -16,7 +15,6 @@ router.post("/", (req, res) => {
 })
 
 router.get('/', (req, res, next) => {
-
 
     Area
         .find()

@@ -1,6 +1,6 @@
 const router = require("express").Router()
-
 const Device = require('./../models/Device.model')
+const deviceController = require('./../lib/deviceController')
 
 router.get("/", (req, res, next) => {
   Device
@@ -9,12 +9,9 @@ router.get("/", (req, res, next) => {
     .sort({ name: 1 })
     .then(response => res.json(response))
     .catch(err => next(err))
-
 })
 
-router.get("/search", (req, res, next) => {
-
-})
+router.get("/search", deviceController.searchByNameOrDeviceType)
 
 router.get("/:id", (req, res, next) => {
   const { id: deviceId } = req.params
@@ -42,7 +39,6 @@ router.put("/:id", (req, res, next) => {
     .findByIdAndUpdate(deviceId, { name, icon, deviceType, logicFuction, area })
     .then(response => res.sendStatus(200))
     .catch(err => next(err))
-
 })
 
 router.delete("/:id", (req, res, next) => {
@@ -52,7 +48,6 @@ router.delete("/:id", (req, res, next) => {
     .findByIdAndDelete(deviceId)
     .then(response => res.sendStatus(200).json(response))
     .catch(err => next(err))
-
 })
 
 module.exports = router

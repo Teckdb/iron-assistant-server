@@ -1,6 +1,6 @@
 const router = require("express").Router()
-
 const User = require("./../models/User.model")
+const UserController = require('./../lib/userController')
 
 router.get("/", (req, res, next) => {
   User
@@ -9,12 +9,9 @@ router.get("/", (req, res, next) => {
     .sort({ email: 1 })
     .then(response => res.json(response))
     .catch(err => next(err))
-
 })
 
-router.get("/search", (req, res, next) => {
-
-})
+router.get("/search", UserController.searchByEmail)
 
 router.get("/:id", (req, res, next) => {
   const { id: userId } = req.params
@@ -25,24 +22,15 @@ router.get("/:id", (req, res, next) => {
     .catch(err => next(err))
 })
 
-router.post("/", (req, res, next) => {
-  const { email, password, role } = req.body
-
-  User
-    .create({ email, password, role })
-    .then(response => res.sendStatus(201))
-    .catch(err => next(err))
-})
-
 router.put("/:id", (req, res, next) => {
-  const { id: userId } = req.params
-  const { email, password, role } = req.body
+  // in production
+  // const { id: userId } = req.params
+  // const { email, password, role } = req.body
 
-  User
-    .findByIdAndUpdate(userId, { email, password, role })
-    .then(response => res.sendStatus(200))
-    .catch(err => next(err))
-
+  // User
+  //   .findByIdAndUpdate(userId, { email, password, role })
+  //   .then(response => res.sendStatus(200))
+  //   .catch(err => next(err))
 })
 
 router.delete("/:id", (req, res, next) => {
@@ -52,7 +40,6 @@ router.delete("/:id", (req, res, next) => {
     .findByIdAndDelete(userId)
     .then(response => res.sendStatus(200).json(response))
     .catch(err => next(err))
-
 })
 
 module.exports = router

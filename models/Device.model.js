@@ -23,7 +23,6 @@ const deviceSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Area'
     }
-
   },
   {
     timestamps: true

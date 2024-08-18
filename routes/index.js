@@ -5,5 +5,6 @@ module.exports = app => {
     app.use("/api/users", usersRouter)
     const areasRouter = require("./areas.routes")
     app.use("/api/areas", areasRouter)
-
+    const authRouter = require("./auth.routes")
+    app.use("/api/auth", authRouter)
 }

@@ -6,7 +6,7 @@
 |             |                    |        |
 |GET          | /devices           |        |
 |GET          | /devices/:id       |        |
-|GET          | /devices/search    |        |
+|GET          | /devices/search    |  by name or deviceType      |
 |POST         | /devices           |        |
 |PUT          | /devices/:id       |        |
 |DELETE       | /devices/:id       |        |
@@ -35,15 +35,15 @@
 |DELETE       | /automation/:id    |        |
 
 ## User routes
-| HTTP METHOD | PATH               | ACTION |
-| ----------- | ------------------ | ------ |
-|             |                    |        |
-|GET          | /user              |        |
-|GET          | /user/:id          |        |
-|GET          | /user/search       |        | 
-|POST         | /user              |        |
-|PUT          | /user/:id          |        |
-|DELETE       | /user/:id          |        |
+| HTTP METHOD | PATH               | ACTION  |
+| ----------- | ------------------ | ------  |
+|             |                    |         |
+|GET          | /user              |         |
+|GET          | /user/:id          |         |
+|GET          | /user/search       | byEmail | 
+|POST         | /user              |         |
+|PUT          | /user/:id          |         |
+|DELETE       | /user/:id          |         |
 
 ## Auth routes
 | HTTP METHOD | PATH               | ACTION |
