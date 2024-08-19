@@ -1,5 +1,4 @@
 const router = require("express").Router()
-
 const Area = require('./../models/Area.model')
 
 router.post("/", (req, res) => {
