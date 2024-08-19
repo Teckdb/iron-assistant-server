@@ -2,7 +2,7 @@ const router = require("express").Router()
 
 const {
     postAutomation,
-    searchAutomationByName,
+    searchAutomations,
     getAutomations,
     getAutomationById,
     putAutomation,
@@ -10,7 +10,7 @@ const {
 
 router.get('/', getAutomations)
 
-router.get("/search", searchAutomationByName)
+router.get("/search", searchAutomations)
 
 router.get('/:_id', getAutomationById)
 
