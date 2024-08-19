@@ -5,17 +5,19 @@ const getAllDevices = (req, res, next) => {
         .find()
         .select({ name: 1, deviceType: 1 })
         .sort({ name: 1 })
-        .then(response => res.json(response))
+        .then(devices => res.json(devices))
         .catch(err => next(err))
 }
 
-const searchDevicesByNameOrDeviceType = (req, res, next) => {
+const searchDevices = (req, res, next) => {
     const { name, deviceType } = req.query
     let searchCriteria = {}
     if (name) { searchCriteria.name = new RegExp(name, 'i') }
     if (deviceType) { searchCriteria.deviceType = new RegExp(deviceType, 'i') }
     Device
         .find(searchCriteria)
+        .select({ name: 1, deviceType: 1 })
+        .sort({ name: 1 })
         .then(devices => res.status(200).json(devices))
         .catch(err => next(err))
 }
@@ -25,6 +27,8 @@ const getDeviceById = (req, res, next) => {
 
     Device
         .findById(deviceId)
+        .select({ name: 1, deviceType: 1 })
+        .sort({ name: 1 })
         .then(device => res.json(device))
         .catch(err => next(err))
 }
@@ -34,7 +38,7 @@ const postNewDevice = (req, res, next) => {
 
     Device
         .create({ name, icon, deviceType, logicFuction, area })
-        .then(response => res.sendStatus(201))
+        .then(() => res.sendStatus(201))
         .catch(err => next(err))
 }
 
@@ -44,7 +48,8 @@ const putEditDeviceById = (req, res, next) => {
 
     Device
         .findByIdAndUpdate(deviceId, { name, icon, deviceType, logicFuction, area })
-        .then(response => res.sendStatus(200))
+        .sort({ name: 1 })
+        .then(() => res.sendStatus(200))
         .catch(err => next(err))
 }
 
@@ -53,13 +58,13 @@ const deleteDeviceById = (req, res, next) => {
 
     Device
         .findByIdAndDelete(deviceId)
-        .then(response => res.sendStatus(200).json(response))
+        .then(() => res.sendStatus(200))
         .catch(err => next(err))
 }
 
 module.exports = {
     getAllDevices,
-    searchDevicesByNameOrDeviceType,
+    searchDevices,
     getDeviceById,
     postNewDevice,
     putEditDeviceById,

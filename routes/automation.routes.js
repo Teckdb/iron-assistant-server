@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const Automation = require('./../models/Automation.model')
+
 const {
     postAutomation,
     searchAutomationByName,

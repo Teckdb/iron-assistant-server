@@ -1,16 +1,16 @@
 const router = require("express").Router()
-const User = require("./../models/User.model")
+
 const {
   getAllUsers,
-  searchUsersByEmail,
-  getUsersById,
+  searchUsers,
+  getUserById,
   deleteUserById } = require('./../controllers/users.controllers')
 
 router.get("/", getAllUsers)
 
-router.get("/search", searchUsersByEmail)
+router.get("/search", searchUsers)
 
-router.get("/:id", getUsersById)
+router.get("/:id", getUserById)
 
 router.delete("/:id", deleteUserById)
 

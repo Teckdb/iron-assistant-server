@@ -57,6 +57,7 @@ const putArea = (req, res) => {
 }
 
 const deleteArea = (req, res) => {
+
     const { _id: areaId } = req.params
 
     Area

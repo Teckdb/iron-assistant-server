@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const Area = require('./../models/Area.model')
+
 const {
     searchByNameOrFloor,
     postArea,

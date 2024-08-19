@@ -2,7 +2,6 @@ const express = require("express")
 const logger = require("morgan")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
-//coaster :P
 const FRONTEND_URL = process.env.ORIGIN || "http://localhost:3000"
 
 module.exports = (app) => {

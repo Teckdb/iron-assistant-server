@@ -1,7 +1,7 @@
 const router = require("express").Router()
-const Device = require('./../models/Device.model')
+
 const {
-  searchDevicesByNameOrDeviceType,
+  searchDevices,
   getAllDevices,
   getDeviceById,
   postNewDevice,
@@ -10,7 +10,7 @@ const {
 
 router.get("/", getAllDevices)
 
-router.get("/search", searchDevicesByNameOrDeviceType)
+router.get("/search", searchDevices)
 
 router.get("/:id", getDeviceById)
 

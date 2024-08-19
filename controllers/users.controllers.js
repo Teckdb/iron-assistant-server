@@ -9,20 +9,24 @@ const getAllUsers = (req, res, next) => {
         .catch(err => next(err))
 }
 
-const searchUsersByEmail = (req, res, next) => {
+const searchUsers = (req, res, next) => {
     const email = req.query.email
 
     User
         .find({ email: new RegExp(email, 'i') })
+        .select({ email: 1 })
+        .sort({ email: 1 })
         .then(users => res.status(200).json(users))
         .catch(err => next(err))
 }
 
-const getUsersById = (req, res, next) => {
+const getUserById = (req, res, next) => {
     const { id: userId } = req.params
 
     User
         .findById(userId)
+        .select({ email: 1 })
+        .sort({ email: 1 })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -32,13 +36,13 @@ const deleteUserById = (req, res, next) => {
 
     User
         .findByIdAndDelete(userId)
-        .then(response => res.sendStatus(200).json(response))
+        .then(() => res.sendStatus(200))
         .catch(err => next(err))
 }
 
 module.exports = {
     getAllUsers,
-    searchUsersByEmail,
-    getUsersById,
+    searchUsers,
+    getUserById,
     deleteUserById
 }

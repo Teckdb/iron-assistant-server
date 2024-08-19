@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const User = require('../models/User.model')
+
 const { signupNewUser, loginByUser, verifyToken } = require('./../controllers/auth.controllers')
 
 router.post('/signup', signupNewUser)

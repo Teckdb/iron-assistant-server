@@ -20,7 +20,7 @@ const searchAutomationByName = (req, res, next) => {
 
     Automation
         .find(automationFilter)
-        .then(automation => res.json(automation))
+        .then(automations => res.json(automations))
         .catch(err => next(err))
 
 }
@@ -29,37 +29,37 @@ const getAutomations = (req, res, next) => {
 
     Automation
         .find()
-        .then(Automations => res.json(Automations))
+        .then(automations => res.json(automations))
         .catch(err => next(err))
 }
 
 const getAutomationById = (req, res, next) => {
 
-    const { _id: AutomationId } = req.params
+    const { _id: automationId } = req.params
 
     Automation
-        .findById(AutomationId)
-        .then(Automation => res.json(Automation))
+        .findById(automationId)
+        .then(automation => res.json(automation))
         .catch(err => next(err))
 }
 
 const putAutomation = (req, res, next) => {
 
-    const { _id: AutomationId } = req.params
+    const { _id: automationId } = req.params
     const { name, icon, devices, user } = req.body
 
     Automation
-        .findByIdAndUpdate(AutomationId, { name, icon, devices, user }, { new: true })
-        .then(Automation => res.json(Automation))
+        .findByIdAndUpdate(automationId, { name, icon, devices, user }, { new: true })
+        .then(automation => res.json(automation))
         .catch(err => next(err))
 }
 
 const deleteAutomation = (req, res, next) => {
-    const { _id: AutomationId } = req.params
+    const { _id: automationId } = req.params
 
     Automation
-        .findByIdAndDelete(AutomationId)
-        .then(Automation => res.json(Automation))
+        .findByIdAndDelete(automationId)
+        .then(automation => res.json(automation))
         .catch(err => next(err))
 }
 
