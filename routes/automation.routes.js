@@ -1,6 +1,4 @@
 const router = require("express").Router()
-
-const { response } = require("express")
 const Automation = require('./../models/Automation.model')
 
 router.post("/", (req, res) => {
@@ -15,7 +13,6 @@ router.post("/", (req, res) => {
 })
 
 router.get('/', (req, res, next) => {
-
 
     Automation
         .find()
