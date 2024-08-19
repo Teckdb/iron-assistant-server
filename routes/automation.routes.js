@@ -1,6 +1,5 @@
 const router = require("express").Router()
 
-const { response } = require("express")
 const Automation = require('./../models/Automation.model')
 
 router.post("/", (req, res) => {
