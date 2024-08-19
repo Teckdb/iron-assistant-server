@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const Device = require('./../models/Device.model')
-const deviceController = require('./../lib/deviceController')
+const deviceController = require('./../controllers/device.controllers')
 
 router.get("/", (req, res, next) => {
   Device
