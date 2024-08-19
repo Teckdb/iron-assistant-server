@@ -22,6 +22,10 @@ const deviceSchema = new Schema(
     area: {
       type: Schema.Types.ObjectId,
       ref: 'Area'
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'Owner'
     }
   },
   {

@@ -16,6 +16,11 @@ const areaSchema = new Schema(
     picture: {
       type: String
     }
+    ,
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'Owner'
+    }
   },
   {
     timestamps: true

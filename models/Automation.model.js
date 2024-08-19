@@ -16,6 +16,10 @@ const automationSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User'
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'Owner'
     }
   },
   {

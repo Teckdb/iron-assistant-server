@@ -65,7 +65,6 @@ router.get('/search', (req, res) => {
         .catch((err) => res.status(500).json({ code: 500, message: "Error while searching the areas", details: err }))
 })
 
-
 module.exports = router
 
 

@@ -1,53 +1,23 @@
 const router = require("express").Router()
 const Device = require('./../models/Device.model')
-const deviceController = require('./../lib/deviceController')
+const {
+  searchDevicesByNameOrDeviceType,
+  getAllDevices,
+  getDeviceById,
+  postNewDevice,
+  putEditDeviceById,
+  deleteDeviceById } = require('./../controllers/devices.controllers')
 
-router.get("/", (req, res, next) => {
-  Device
-    .find()
-    .select({ name: 1, deviceType: 1 })
-    .sort({ name: 1 })
-    .then(response => res.json(response))
-    .catch(err => next(err))
-})
+router.get("/", getAllDevices)
 
-router.get("/search", deviceController.searchByNameOrDeviceType)
+router.get("/search", searchDevicesByNameOrDeviceType)
 
-router.get("/:id", (req, res, next) => {
-  const { id: deviceId } = req.params
+router.get("/:id", getDeviceById)
 
-  Device
-    .findById(deviceId)
-    .then(response => res.json(response))
-    .catch(err => next(err))
-})
+router.post("/", postNewDevice)
 
-router.post("/", (req, res, next) => {
-  const { name, icon, deviceType, logicFuction, area } = req.body
+router.put("/:id", putEditDeviceById)
 
-  Device
-    .create({ name, icon, deviceType, logicFuction, area })
-    .then(response => res.sendStatus(201))
-    .catch(err => next(err))
-})
-
-router.put("/:id", (req, res, next) => {
-  const { id: deviceId } = req.params
-  const { name, icon, deviceType, logicFuction, area } = req.body
-
-  Device
-    .findByIdAndUpdate(deviceId, { name, icon, deviceType, logicFuction, area })
-    .then(response => res.sendStatus(200))
-    .catch(err => next(err))
-})
-
-router.delete("/:id", (req, res, next) => {
-  const { id: deviceId } = req.params
-
-  Device
-    .findByIdAndDelete(deviceId)
-    .then(response => res.sendStatus(200).json(response))
-    .catch(err => next(err))
-})
+router.delete("/:id", deleteDeviceById)
 
 module.exports = router
