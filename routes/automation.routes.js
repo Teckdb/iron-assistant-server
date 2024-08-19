@@ -1,57 +1,23 @@
 const router = require("express").Router()
 const Automation = require('./../models/Automation.model')
+const {
+    postAutomation,
+    searchAutomationByName,
+    getAutomations,
+    getAutomationById,
+    putAutomation,
+    deleteAutomation } = require('./../controllers/automations.controlles')
 
-router.post("/", (req, res) => {
+router.get('/', getAutomations)
 
-    const { name, icon, devices, user } = req.body
+router.get("/search", searchAutomationByName)
 
-    Automation
-        .create({ name, icon, devices, user })
-        .then(newAutomation => res.json(newAutomation))
-        .catch((err) => res.status(500).json({ code: 500, message: "Error while creating the automation", details: err }))
+router.get('/:_id', getAutomationById)
 
-})
+router.post("/", postAutomation)
 
-router.get('/', (req, res, next) => {
+router.put("/:_id", putAutomation)
 
-    Automation
-        .find()
-        .then(Automations => res.json(Automations))
-        .catch((err) => res.status(500).json({ code: 500, message: "Error while fetching the Automations", details: err }))
-
-})
-
-
-router.get('/:_id', (req, res, next) => {
-
-    const { _id: AutomationId } = req.params
-
-    Automation
-        .findById(AutomationId)
-        .then(Automation => res.json(Automation))
-        .catch((err) => res.status(500).json({ code: 500, message: "Error while fetching the Automation", details: err }))
-
-})
-
-router.put("/:_id", (req, res) => {
-
-    const { _id: AutomationId } = req.params
-    const { name, icon, devices, user } = req.body
-
-    Automation
-        .findByIdAndUpdate(AutomationId, { name, icon, devices, user }, { new: true })
-        .then(Automation => res.json(Automation))
-        .catch((err) => res.status(500).json({ code: 500, message: "Error while editing the Automation", details: err }))
-})
-
-router.delete("/:_id", (req, res) => {
-    const { _id: AutomationId } = req.params
-
-    Automation
-        .findByIdAndDelete(AutomationId)
-        .then(Automation => res.json(Automation))
-        .catch((err) => res.status(500).json({ code: 500, message: "Error while deleting the Automation", details: err }))
-
-})
+router.delete("/:_id", deleteAutomation)
 
 module.exports = router

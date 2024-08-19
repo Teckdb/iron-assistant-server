@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const User = require("./../models/User.model")
-const UserController = require('./../lib/userController')
+const UserController = require('./../controllers/user.controller')
 
 router.get("/", (req, res, next) => {
   User

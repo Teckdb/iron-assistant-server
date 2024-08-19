@@ -9,7 +9,7 @@ module.exports = app => {
     app.use("/api/areas", areasRouter)
 
     const automationRouter = require("./automation.routes")
-    app.use("/api/automation", automationRouter)
+    app.use("/api/automations", automationRouter)
 
     const authRouter = require("./auth.routes")
     app.use("/api/auth", authRouter)
