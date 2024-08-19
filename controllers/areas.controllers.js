@@ -11,7 +11,7 @@ const postArea = (req, res, next) => {
         .catch(err => next(err))
 }
 
-const searchByNameOrFloor = (req, res, next) => {
+const searchAreas = (req, res, next) => {
     const { name, floor } = req.query
 
     let areaFilter = {}
@@ -22,6 +22,8 @@ const searchByNameOrFloor = (req, res, next) => {
 
     Area
         .find(areaFilter)
+        .select({ name })
+        .sort({ name: 1 })
         .then(areas => res.json(areas))
         .catch(err => next(err))
 
@@ -31,6 +33,8 @@ const getAreas = (req, res, next) => {
 
     Area
         .find()
+        .select({ name: 1 })
+        .sort({ name: 1 })
         .then(areas => res.json(areas))
         .catch(err => next(err))
 }
@@ -41,6 +45,8 @@ const getAreaById = (req, res, next) => {
 
     Area
         .findById(areaId)
+        .select({ name: 1 })
+        .sort({ name: 1 })
         .then(area => res.json(area))
         .catch(err => next(err))
 }
@@ -66,7 +72,7 @@ const deleteArea = (req, res) => {
 }
 
 module.exports = {
-    searchByNameOrFloor,
+    searchAreas,
     postArea,
     getAreas,
     getAreaById,

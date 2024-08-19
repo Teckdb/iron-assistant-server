@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const Area = require('./../models/Area.model')
 const {
-    searchByNameOrFloor,
+    searchAreas,
     postArea,
     getAreas,
     getAreaById,
@@ -10,7 +10,7 @@ const {
 
 router.get('/', getAreas)
 
-router.get('/search', searchByNameOrFloor)
+router.get('/search', searchAreas)
 
 router.get('/:_id', getAreaById)
 

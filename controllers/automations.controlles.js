@@ -10,7 +10,7 @@ const postAutomation = (req, res, next) => {
         .catch(err => next(err))
 }
 
-const searchAutomationByName = (req, res, next) => {
+const searchAutomations = (req, res, next) => {
 
     const { name } = req.query
 
@@ -20,6 +20,8 @@ const searchAutomationByName = (req, res, next) => {
 
     Automation
         .find(automationFilter)
+        .select({ name })
+        .sort({ name: 1 })
         .then(automation => res.json(automation))
         .catch(err => next(err))
 
@@ -29,6 +31,8 @@ const getAutomations = (req, res, next) => {
 
     Automation
         .find()
+        .select({ name: 1 })
+        .sort({ name: 1 })
         .then(Automations => res.json(Automations))
         .catch(err => next(err))
 }
@@ -39,6 +43,8 @@ const getAutomationById = (req, res, next) => {
 
     Automation
         .findById(AutomationId)
+        .select({ name: 1 })
+        .sort({ name: 1 })
         .then(Automation => res.json(Automation))
         .catch(err => next(err))
 }
@@ -65,7 +71,7 @@ const deleteAutomation = (req, res, next) => {
 
 module.exports = {
     postAutomation,
-    searchAutomationByName,
+    searchAutomations,
     getAutomations,
     getAutomationById,
     putAutomation,
