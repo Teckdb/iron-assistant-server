@@ -3,7 +3,7 @@ const Device = require('./../models/Device.model')
 const getAllDevices = (req, res, next) => {
     Device
         .find()
-        .select({ name: 1, deviceType: 1 })
+        .select({ name: 1, deviceType: 1, owner: 1 })
         .sort({ name: 1 })
         .then(devices => res.json(devices))
         .catch(err => next(err))
@@ -35,9 +35,10 @@ const getDeviceById = (req, res, next) => {
 
 const postNewDevice = (req, res, next) => {
     const { name, icon, deviceType, logicFuction, area } = req.body
+    const { _id } = req.payload
 
     Device
-        .create({ name, icon, deviceType, logicFuction, area })
+        .create({ name, icon, deviceType, logicFuction, area, owner: _id })
         .then(() => res.sendStatus(201))
         .catch(err => next(err))
 }

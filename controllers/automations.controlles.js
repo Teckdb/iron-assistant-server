@@ -3,9 +3,10 @@ const Automation = require('./../models/Automation.model')
 const postAutomation = (req, res, next) => {
 
         const { name, icon, devices, user } = req.body
+        const { _id } = req.payload
 
         Automation
-                .create({ name, icon, devices, user })
+                .create({ name, icon, devices, user, owner: _id })
                 .then(newAutomation => res.json(newAutomation))
                 .catch(err => next(err))
 }

@@ -1,5 +1,6 @@
 const router = require("express").Router()
 
+const isAuthenticated = require("../middleware/verifyToken")
 const {
   searchDevices,
   getAllDevices,
@@ -14,7 +15,7 @@ router.get("/search", searchDevices)
 
 router.get("/:id", getDeviceById)
 
-router.post("/", postNewDevice)
+router.post("/", isAuthenticated, postNewDevice)
 
 router.put("/:id", putEditDeviceById)
 

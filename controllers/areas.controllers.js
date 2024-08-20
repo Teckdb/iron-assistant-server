@@ -4,9 +4,10 @@ const Area = require('./../models/Area.model')
 const postArea = (req, res, next) => {
 
     const { name, icon, floor, picture } = req.body
+    const { _id } = req.payload
 
     Area
-        .create({ name, icon, floor, picture })
+        .create({ name, icon, floor, picture, owner: _id })
         .then(newArea => res.json(newArea))
         .catch(err => next(err))
 }

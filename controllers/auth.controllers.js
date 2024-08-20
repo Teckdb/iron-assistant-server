@@ -76,7 +76,6 @@ const loginByUser = (req, res, next) => {
 }
 
 const verifyToken = (req, res, next) => {
-    isAuthenticated(req, res, next)
     res.json(req.payload)
 }
 

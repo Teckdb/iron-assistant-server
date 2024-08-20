@@ -1,5 +1,6 @@
 const router = require("express").Router()
 
+const isAuthenticated = require("../middleware/verifyToken")
 const {
     postAutomation,
     searchAutomations,
@@ -14,7 +15,7 @@ router.get("/search", searchAutomations)
 
 router.get('/:_id', getAutomationById)
 
-router.post("/", postAutomation)
+router.post("/", isAuthenticated, postAutomation)
 
 router.put("/:_id", putAutomation)
 

@@ -1,5 +1,6 @@
 const router = require("express").Router()
 
+const isAuthenticated = require("../middleware/verifyToken")
 const {
     searchAreas,
     postArea,
@@ -14,7 +15,7 @@ router.get('/search', searchAreas)
 
 router.get('/:_id', getAreaById)
 
-router.post("/", postArea)
+router.post("/", isAuthenticated, postArea)
 
 router.put("/:_id", putArea)
 
