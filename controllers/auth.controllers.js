@@ -1,7 +1,6 @@
 const saltRounds = 10
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const isAuthenticated = require('../middleware/verifyToken')
 const User = require('./../models/User.model')
 
 const signupNewUser = (req, res, next) => {
@@ -12,8 +11,20 @@ const signupNewUser = (req, res, next) => {
         return
     }
 
+    if (username.length < 2) {
+        res.status(400).json({ message: 'Username must have at least 3 characters' })
+        return
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+    if (!emailRegex.test(email)) {
+        res.status(400).json({ message: 'Provide a valid email address.' })
+        return
+    }
+
     if (password.length < 2) {
         res.status(400).json({ message: 'Password must have at least 3 characters' })
+        return
     }
 
     User
@@ -38,7 +49,7 @@ const signupNewUser = (req, res, next) => {
 
 const loginByUser = (req, res, next) => {
 
-    const { email, password } = req.query
+    const { email, password } = req.body
 
     if (email === '' || password === '') {
         res.status(400).json({ message: 'Provide email and password.' })

@@ -25,7 +25,6 @@ const searchAutomations = (req, res, next) => {
                 .sort({ name: 1 })
                 .then(automation => res.json(automation))
                 .catch(err => next(err))
-
 }
 
 const getAutomations = (req, res, next) => {
