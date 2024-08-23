@@ -3,6 +3,7 @@ const router = require("express").Router()
 const isAuthenticated = require("../middleware/verifyToken")
 const {
   searchDevices,
+  searchAvailableDevices,
   getAllDevices,
   getDeviceById,
   postNewDevice,
@@ -10,6 +11,8 @@ const {
   deleteDeviceById } = require('./../controllers/devices.controllers')
 
 router.get("/", getAllDevices)
+
+router.get("/available", searchAvailableDevices)
 
 router.get("/search", searchDevices)
 

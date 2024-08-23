@@ -3,12 +3,12 @@ const Area = require('./../models/Area.model')
 
 const postArea = (req, res, next) => {
 
-    const { name, icon, floor, picture } = req.body
+    const { name, icon, floor, picture, devices } = req.body
     const { _id } = req.payload
 
     Area
-        .create({ name, icon, floor, picture, owner: _id })
-        .then(newArea => res.json(newArea))
+        .create({ name, icon, floor, picture, owner: _id, devices: devices })
+        .then((area) => res.status(201).json(area))
         .catch(err => next(err))
 }
 
@@ -34,7 +34,8 @@ const getAreas = (req, res, next) => {
 
     Area
         .find()
-        .select({ name: 1 })
+        .select({ name: 1, floor: 1, devices: 1 })
+        .populate("devices")
         .sort({ name: 1 })
         .then(areas => res.json(areas))
         .catch(err => next(err))

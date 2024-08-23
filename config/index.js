@@ -13,7 +13,6 @@ module.exports = (app) => {
     })
   )
 
-
   app.use(logger("dev"))
 
   app.use(express.json())

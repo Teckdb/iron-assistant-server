@@ -17,8 +17,8 @@ router.get('/:_id', getAutomationById)
 
 router.post("/", isAuthenticated, postAutomation)
 
-router.put("/:_id", putAutomation)
+router.put("/:_id", isAuthenticated, putAutomation)
 
-router.delete("/:_id", deleteAutomation)
+router.delete("/:_id", isAuthenticated, deleteAutomation)
 
 module.exports = router

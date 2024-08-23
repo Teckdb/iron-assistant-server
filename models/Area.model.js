@@ -15,8 +15,8 @@ const areaSchema = new Schema(
     },
     picture: {
       type: String
-    }
-    ,
+    },
+    devices: [{ type: Schema.Types.ObjectId, ref: 'Device' }],
     owner: {
       type: Schema.Types.ObjectId,
       ref: 'Owner'

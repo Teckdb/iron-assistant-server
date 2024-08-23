@@ -3,7 +3,7 @@ const Device = require('./../models/Device.model')
 const getAllDevices = (req, res, next) => {
     Device
         .find()
-        .select({ name: 1, deviceType: 1, owner: 1 })
+        .select({ name: 1, deviceType: 1, owner: 1, area: 1 })
         .sort({ name: 1 })
         .then(devices => res.json(devices))
         .catch(err => next(err))
@@ -22,6 +22,19 @@ const searchDevices = (req, res, next) => {
         .catch(err => next(err))
 }
 
+const searchAvailableDevices = (req, res, next) => {
+
+    Device
+        .find({
+            $or: [{ area: { $exists: false } }]
+        })
+        .select({ name: 1, deviceType: 1 })
+        .sort({ name: 1 })
+        .then(devices => res.json(devices))
+        .catch(err => next(err))
+}
+
+
 const getDeviceById = (req, res, next) => {
     const { id: deviceId } = req.params
 
@@ -34,11 +47,11 @@ const getDeviceById = (req, res, next) => {
 }
 
 const postNewDevice = (req, res, next) => {
-    const { name, icon, deviceType, logicFuction, area } = req.body
+    const { name, icon, deviceType, logicFuction, area, brightness, temperature } = req.body
     const { _id } = req.payload
 
     Device
-        .create({ name, icon, deviceType, logicFuction, area, owner: _id })
+        .create({ name, icon, deviceType, logicFuction, area, brightness, temperature, owner: _id })
         .then(() => res.sendStatus(201))
         .catch(err => next(err))
 }
@@ -65,6 +78,7 @@ const deleteDeviceById = (req, res, next) => {
 
 module.exports = {
     getAllDevices,
+    searchAvailableDevices,
     searchDevices,
     getDeviceById,
     postNewDevice,
