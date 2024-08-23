@@ -42,7 +42,7 @@ const getAutomationById = (req, res, next) => {
         const { _id: automationId } = req.params
 
         Automation
-                .findById(AutomationId)
+                .findById(automationId)
                 .select({ name: 1 })
                 .sort({ name: 1 })
                 .then(Automation => res.json(Automation))

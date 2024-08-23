@@ -34,7 +34,6 @@ const searchAvailableDevices = (req, res, next) => {
         .catch(err => next(err))
 }
 
-
 const getDeviceById = (req, res, next) => {
     const { id: deviceId } = req.params
 
@@ -44,6 +43,19 @@ const getDeviceById = (req, res, next) => {
         .sort({ name: 1 })
         .then(device => res.json(device))
         .catch(err => next(err))
+}
+
+const toggleDeviceStatusController = (req, res, next) => {
+
+    const { id: deviceId } = req.params
+    const { brightness } = req.body
+
+    Device
+        .findByIdAndUpdate(deviceId, { brightness })
+        .then(() => {
+            res.status(200).json({ message: 'Device status updated', result });
+        })
+        .catch(err => next(err));
 }
 
 const postNewDevice = (req, res, next) => {
@@ -81,6 +93,7 @@ module.exports = {
     searchAvailableDevices,
     searchDevices,
     getDeviceById,
+    toggleDeviceStatusController,
     postNewDevice,
     putEditDeviceById,
     deleteDeviceById

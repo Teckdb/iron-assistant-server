@@ -9,11 +9,11 @@ const {
     putAutomation,
     deleteAutomation } = require('./../controllers/automations.controlles')
 
-router.get('/', getAutomations)
+router.get('/', isAuthenticated, getAutomations)
 
-router.get("/search", searchAutomations)
+router.get("/search", isAuthenticated, searchAutomations)
 
-router.get('/:_id', getAutomationById)
+router.get('/:_id', isAuthenticated, getAutomationById)
 
 router.post("/", isAuthenticated, postAutomation)
 

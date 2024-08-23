@@ -1,4 +1,5 @@
 const router = require("express").Router()
+const isAuthenticated = require("../middleware/verifyToken")
 
 const {
   getAllUsers,
@@ -6,12 +7,12 @@ const {
   getUserById,
   deleteUserById } = require('./../controllers/users.controllers')
 
-router.get("/", getAllUsers)
+router.get("/", isAuthenticated, getAllUsers)
 
-router.get("/search", searchUsers)
+router.get("/search", isAuthenticated, searchUsers)
 
-router.get("/:id", getUserById)
+router.get("/:id", isAuthenticated, getUserById)
 
-router.delete("/:id", deleteUserById)
+router.delete("/:id", isAuthenticated, deleteUserById)
 
 module.exports = router

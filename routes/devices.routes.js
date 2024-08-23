@@ -6,22 +6,25 @@ const {
   searchAvailableDevices,
   getAllDevices,
   getDeviceById,
+  toggleDeviceStatusController,
   postNewDevice,
   putEditDeviceById,
   deleteDeviceById } = require('./../controllers/devices.controllers')
 
-router.get("/", getAllDevices)
+router.get("/", isAuthenticated, getAllDevices)
 
-router.get("/available", searchAvailableDevices)
+router.get("/available", isAuthenticated, searchAvailableDevices)
 
-router.get("/search", searchDevices)
+router.get("/search", isAuthenticated, searchDevices)
 
-router.get("/:id", getDeviceById)
+router.get("/:id", isAuthenticated, getDeviceById)
 
 router.post("/", isAuthenticated, postNewDevice)
 
-router.put("/:id", putEditDeviceById)
+router.put("/:id", isAuthenticated, toggleDeviceStatusController)
 
-router.delete("/:id", deleteDeviceById)
+router.put("/:id", isAuthenticated, putEditDeviceById)
+
+router.delete("/:id", isAuthenticated, deleteDeviceById)
 
 module.exports = router

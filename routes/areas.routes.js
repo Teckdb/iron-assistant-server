@@ -9,17 +9,17 @@ const {
     putArea,
     deleteArea } = require('./../controllers/areas.controllers')
 
-router.get('/', getAreas)
+router.get('/', isAuthenticated, getAreas)
 
-router.get('/search', searchAreas)
+router.get('/search', isAuthenticated, searchAreas)
 
-router.get('/:_id', getAreaById)
+router.get('/:_id', isAuthenticated, getAreaById)
 
-router.post("/", isAuthenticated, postArea)
+router.post("/", isAuthenticated, isAuthenticated, postArea)
 
-router.put("/:_id", putArea)
+router.put("/:_id", isAuthenticated, putArea)
 
-router.delete("/:_id", deleteArea)
+router.delete("/:_id", isAuthenticated, deleteArea)
 
 module.exports = router
 
