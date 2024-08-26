@@ -1,10 +1,12 @@
 const Device = require('./../models/Device.model')
 
 const getAllDevices = (req, res, next) => {
+
     Device
         .find()
         .select({ name: 1, deviceType: 1, owner: 1, area: 1 })
         .sort({ name: 1 })
+        .populate('area')
         .then(devices => res.json(devices))
         .catch(err => next(err))
 }
@@ -18,7 +20,7 @@ const searchDevices = (req, res, next) => {
         .find(searchCriteria)
         .select({ name: 1, deviceType: 1 })
         .sort({ name: 1 })
-        .then(devices => res.status(200).json(devices))
+        .then(devices => res.json(devices))
         .catch(err => next(err))
 }
 
@@ -26,7 +28,10 @@ const searchAvailableDevices = (req, res, next) => {
 
     Device
         .find({
-            $or: [{ area: { $exists: false } }]
+            $or: [
+                { area: { $exists: false } },
+                { area: null }
+            ]
         })
         .select({ name: 1, deviceType: 1 })
         .sort({ name: 1 })
@@ -53,7 +58,7 @@ const toggleDeviceStatusController = (req, res, next) => {
     Device
         .findByIdAndUpdate(deviceId, { brightness })
         .then(() => {
-            res.status(200).json({ message: 'Device status updated', result });
+            res.json({ message: 'Device status updated', result });
         })
         .catch(err => next(err));
 }
@@ -74,7 +79,6 @@ const putEditDeviceById = (req, res, next) => {
 
     Device
         .findByIdAndUpdate(deviceId, { name, icon, deviceType, logicFuction, area })
-        .sort({ name: 1 })
         .then(() => res.sendStatus(200))
         .catch(err => next(err))
 }

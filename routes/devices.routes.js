@@ -21,7 +21,7 @@ router.get("/:id", isAuthenticated, getDeviceById)
 
 router.post("/", isAuthenticated, postNewDevice)
 
-router.put("/:id", isAuthenticated, toggleDeviceStatusController)
+router.put("/toggle/:id", isAuthenticated, toggleDeviceStatusController)
 
 router.put("/:id", isAuthenticated, putEditDeviceById)
 

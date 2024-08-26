@@ -16,7 +16,7 @@ const searchUsers = (req, res, next) => {
         .find({ email: new RegExp(email, 'i') })
         .select({ email: 1 })
         .sort({ email: 1 })
-        .then(users => res.status(200).json(users))
+        .then(users => res.json(users))
         .catch(err => next(err))
 }
 
