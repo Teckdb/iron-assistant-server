@@ -35,7 +35,7 @@ const getAreas = (req, res, next) => {
     Area
         .find()
         .select({ name: 1, floor: 1, devices: 1 })
-        .populate("devices")
+        // .populate("device") TODO: populate dons't work
         .sort({ name: 1 })
         .then(areas => res.json(areas))
         .catch(err => next(err))

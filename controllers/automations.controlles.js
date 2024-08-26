@@ -31,8 +31,9 @@ const getAutomations = (req, res, next) => {
 
         Automation
                 .find()
-                .select({ name: 1 })
+                .select({ name: 1, devices: 1 })
                 .sort({ name: 1 })
+                .populate('devices')
                 .then(Automations => res.json(Automations))
                 .catch(err => next(err))
 }
