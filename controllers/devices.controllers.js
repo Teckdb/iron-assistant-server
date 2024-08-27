@@ -1,13 +1,28 @@
 const Device = require('./../models/Device.model')
+const User = require('./../models/User.model')
 
 const getAllDevices = (req, res, next) => {
 
     Device
         .find()
-        .select({ name: 1, deviceType: 1, owner: 1, area: 1 })
+        .select({ name: 1, deviceType: 1, owner: 1, area: 1, email: 1 })
         .sort({ name: 1 })
         .populate('area')
-        .then(devices => res.json(devices))
+        .lean()
+        .then(devices => {
+            const devicePromises = devices.map(device => {
+                return User
+                    .findById(device.owner)
+                    .select('email')
+                    .then(user => {
+                        device.ownerEmail = user ? user.email : null
+                        return device
+                    })
+            })
+            return Promise.all(devicePromises)
+        }
+        )
+        .then(devicesWithEmails => res.json(devicesWithEmails))
         .catch(err => next(err))
 }
 
@@ -58,9 +73,9 @@ const toggleDeviceStatusController = (req, res, next) => {
     Device
         .findByIdAndUpdate(deviceId, { brightness })
         .then(() => {
-            res.json({ message: 'Device status updated', result });
+            res.json({ message: 'Device status updated', result })
         })
-        .catch(err => next(err));
+        .catch(err => next(err))
 }
 
 const postNewDevice = (req, res, next) => {
@@ -68,7 +83,7 @@ const postNewDevice = (req, res, next) => {
     const { _id } = req.payload
 
     Device
-        .create({ name, icon, deviceType, logicFuction, area, brightness, temperature, owner: _id })
+        .create({ name, icon, deviceType, logicFuction, area, brightness, temperature, user, owner: _id })
         .then(() => res.sendStatus(201))
         .catch(err => next(err))
 }

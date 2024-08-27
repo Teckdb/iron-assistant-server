@@ -56,18 +56,18 @@ const getAreaById = (req, res, next) => {
 
 const putArea = (req, res, next) => {
 
-    const { _id: areaId } = req.params;
-    const { name, icon, floor, picture, selectedDevices } = req.body;
+    const { _id: areaId } = req.params
+    const { name, icon, floor, picture, selectedDevices } = req.body
 
     Area
         .findById(areaId)
         .populate('devices')
         .then(area => {
-            const currentDeviceIds = area.devices.map(device => device._id.toString());
+            const currentDeviceIds = area.devices.map(device => device._id.toString())
 
-            const removedDevices = currentDeviceIds.filter(deviceId => !selectedDevices.includes(deviceId));
+            const removedDevices = currentDeviceIds.filter(deviceId => !selectedDevices.includes(deviceId))
 
-            const addedDevices = selectedDevices.filter(deviceId => !currentDeviceIds.includes(deviceId));
+            const addedDevices = selectedDevices.filter(deviceId => !currentDeviceIds.includes(deviceId))
 
             return Device
                 .updateMany(
@@ -78,19 +78,19 @@ const putArea = (req, res, next) => {
                     return Device.updateMany(
                         { _id: { $in: addedDevices } },
                         { $set: { area: areaId } }
-                    );
+                    )
                 })
                 .then(() => {
-                    area.name = name;
-                    area.icon = icon;
-                    area.floor = floor;
-                    area.picture = picture;
-                    area.devices = selectedDevices;
-                    return area.save();
+                    area.name = name
+                    area.icon = icon
+                    area.floor = floor
+                    area.picture = picture
+                    area.devices = selectedDevices
+                    return area.save()
                 })
         })
         .then(updatedArea => res.json(updatedArea))
-        .catch(err => next(err));
+        .catch(err => next(err))
 }
 
 const deleteArea = (req, res) => {
