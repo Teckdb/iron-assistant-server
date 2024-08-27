@@ -13,4 +13,7 @@ module.exports = app => {
 
     const authRouter = require("./auth.routes")
     app.use("/api/auth", authRouter)
+
+    const uploadRoutes = require("./upload.routes")
+    app.use("/api/upload", uploadRoutes)
 }
