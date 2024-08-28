@@ -3,7 +3,6 @@ const isAuthenticated = require("../middleware/verifyToken")
 
 const cloudinary = require("cloudinary").v2;
 
-
 router.post("/images", isAuthenticated,
 
     getAllUsers = (req, res, next) => {
@@ -16,7 +15,5 @@ router.post("/images", isAuthenticated,
     }
 
 )
-
-
 
 module.exports = router
