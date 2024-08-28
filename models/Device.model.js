@@ -10,6 +10,9 @@ const deviceSchema = new Schema(
     icon: {
       type: String
     },
+    picture: {
+
+    },
     deviceType: {
       type: String,
       enum: [

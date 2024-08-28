@@ -59,7 +59,7 @@ const getDeviceById = (req, res, next) => {
 
     Device
         .findById(deviceId)
-        .select({ name: 1, deviceType: 1 })
+        .select({ name: 1, deviceType: 1, picture: 1 })
         .sort({ name: 1 })
         .then(device => res.json(device))
         .catch(err => next(err))
@@ -79,11 +79,11 @@ const toggleDeviceStatusController = (req, res, next) => {
 }
 
 const postNewDevice = (req, res, next) => {
-    const { name, icon, deviceType, logicFuction, area, brightness, temperature } = req.body
+    const { name, icon, deviceType, logicFuction, area, brightness, temperature, picture } = req.body
     const { _id } = req.payload
 
     Device
-        .create({ name, icon, deviceType, logicFuction, area, brightness, temperature, user, owner: _id })
+        .create({ name, icon, deviceType, logicFuction, area, brightness, temperature, picture, owner: _id })
         .then(() => res.sendStatus(201))
         .catch(err => next(err))
 }
