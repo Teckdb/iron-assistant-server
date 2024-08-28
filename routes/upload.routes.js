@@ -1,19 +1,16 @@
 const router = require("express").Router()
-const isAuthenticated = require("../middleware/verifyToken")
 
-const cloudinary = require("cloudinary").v2;
+const uploader = require('./../middleware/uploader.middleware')
 
-router.post("/images", isAuthenticated,
+router.post('/image', uploader.single('imageData'), (req, res) => {
 
-    getAllUsers = (req, res, next) => {
-        User
-            .find()
-            .select({ email: 1 })
-            .sort({ email: 1 })
-            .then(response => res.json(response))
-            .catch(err => next(err))
+    if (!req.file) {
+        res.status(500).json({ errorMessage: 'Error caragndo el archivo' })
+        return
     }
 
-)
+    res.json({ cloudinary_url: req.file.path })
+})
+
 
 module.exports = router

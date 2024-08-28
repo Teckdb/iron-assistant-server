@@ -5,7 +5,7 @@ const getAllDevices = (req, res, next) => {
 
     Device
         .find()
-        .select({ name: 1, deviceType: 1, owner: 1, area: 1, email: 1 })
+        .select({ name: 1, deviceType: 1, owner: 1, area: 1, email: 1, picture: 1 })
         .sort({ name: 1 })
         .populate('area')
         .lean()
