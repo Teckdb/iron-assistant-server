@@ -17,6 +17,9 @@ const automationSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User'
     },
+    picture: {
+      type: String
+    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: 'Owner'

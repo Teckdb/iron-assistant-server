@@ -90,10 +90,10 @@ const postNewDevice = (req, res, next) => {
 
 const putEditDeviceById = (req, res, next) => {
     const { id: deviceId } = req.params
-    const { name, icon, deviceType, logicFuction, area } = req.body
+    const { name, icon, deviceType, logicFuction, area, picture } = req.body
 
     Device
-        .findByIdAndUpdate(deviceId, { name, icon, deviceType, logicFuction, area })
+        .findByIdAndUpdate(deviceId, { name, icon, deviceType, logicFuction, area, picture })
         .then(() => res.sendStatus(200))
         .catch(err => next(err))
 }
